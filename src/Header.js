@@ -1,8 +1,9 @@
+import logo from './img/logo.png'
 
-function Header() {
+const Header = () => {
     return (
         <>
-            <img src="./img/logo.png" alt="logo"></img>
+            <img src={logo} alt="logo"></img>
         </>
     );
 }

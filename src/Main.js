@@ -1,8 +1,8 @@
 
-function    Main() {
+const Main = () => {
     return (
         <>
-            
+
         </>
     );
 }

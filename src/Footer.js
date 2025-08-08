@@ -1,9 +1,10 @@
+import logo2 from './img/logo2.png'
 
-function    Footer() {
+const Footer = () => {
     return (
         <>
             <section>
-                <img src="./img/logo2.png" alt="logo of the restaurant"></img>
+                <img src={logo2} alt="logo of the restaurant"></img>
             </section>
             <section>
                 <h3>Doormat Navigation</h3>

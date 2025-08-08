@@ -1,8 +1,8 @@
 import './App.css';
-import './Header';
-import './Nav';
-import './Main';
-import './Footer';
+import Header from './Header';
+import Nav from './Nav';
+import Main from './Main';
+import Footer from './Footer';
 
 function App() {
   return (
