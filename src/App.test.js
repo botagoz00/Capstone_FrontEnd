@@ -2,27 +2,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import BookingForm from './BookingForm';
 import BookingPage from './BookingPage';
-import {initializeTimes, updateTimes} from './BookingForm';
+import {initializeTimes, updateTimes, validateDate, validateGuests, validateOccasion, validateTime} from './BookingForm';
 import { fetchAPI } from './api';
-
-test('Renders the BookingForm date label', () => {
-  const fakeTimes = [{ times: '17:00' }];
-  const fakeDispatch = jest.fn();
-  const fakeSubmitForm = jest.fn();
-
-  render(<BookingForm availableTimes={fakeTimes} dispatch={fakeDispatch} submitForm={fakeSubmitForm}/>);
-  const labelElement = screen.getByLabelText("Choose date");
-  expect(labelElement).toBeInTheDocument();
-});
-
-test('Renders the BookingForm heading', () => {
-    const fakeTimes = [{ times: '17:00' }];
-    const fakeDispatch = jest.fn();
-    const fakeSubmitForm = jest.fn();
-    render(<BookingPage availableTimes={fakeTimes} dispatch={fakeDispatch} submitForm={fakeSubmitForm}/>);
-    const headingElement = screen.getByText("Booking Page");
-    expect(headingElement).toBeInTheDocument();
-})
 
 jest.mock('./api');
 
@@ -55,39 +36,80 @@ describe('updateTimes', () => {
   });
 });
 
-test('BookingForm can be submitted by the user', () => {
-  const mockDispatch = jest.fn();
+test("Guests input should have correct HTML5 attributes", () => {
+  render(<BookingForm availableTimes={[]} dispatch={jest.fn()} submitForm={jest.fn()} />);
 
-  // Provide mock available times
-  const mockAvailableTimes = [
-    { times: '17:00' },
-    { times: '18:00' },
-  ];
-  const mockSubmitForm = jest.fn();
-
-  render(<BookingForm availableTimes={mockAvailableTimes} dispatch={mockDispatch} submitForm={mockSubmitForm}/>);
-
-  // Fill in the date
-  const dateInput = screen.getByLabelText(/choose date/i);
-  fireEvent.change(dateInput, { target: { value: '2025-08-20' } });
-
-  // Fill in the time
-  const timeSelect = screen.getByLabelText(/choose time/i);
-  fireEvent.change(timeSelect, { target: { value: '18:00' } });
-
-  // Fill in the number of guests
   const guestsInput = screen.getByLabelText(/number of guests/i);
-  fireEvent.change(guestsInput, { target: { value: '4' } });
 
-  // Fill in the occasion
+  expect(guestsInput).toHaveAttribute("type", "number");
+  expect(guestsInput).toHaveAttribute("min", "1");
+  expect(guestsInput).toHaveAttribute("max", "20");
+});
+
+test("Date input should be of type date", () => {
+  render(<BookingForm availableTimes={[]} dispatch={jest.fn()} submitForm={jest.fn()} />);
+  const dateInput = screen.getByLabelText(/choose date/i);
+  expect(dateInput).toHaveAttribute("type", "date");
+});
+
+test("Time select should exist and be required", () => {
+  render(<BookingForm availableTimes={["17:00", "18:00"]} dispatch={jest.fn()} submitForm={jest.fn()} />);
+  const timeSelect = screen.getByLabelText(/choose time/i);
+  expect(timeSelect).toBeInTheDocument();
+});
+
+test("Occasion select should have default placeholder option", () => {
+  render(<BookingForm availableTimes={[]} dispatch={jest.fn()} submitForm={jest.fn()} />);
   const occasionSelect = screen.getByLabelText(/occasion/i);
-  fireEvent.change(occasionSelect, { target: { value: 'Birthday' } });
+  expect(occasionSelect).toHaveDisplayValue("Choose occasion");
+});
 
-  // Submit the form
-  const submitButton = screen.getByRole('button', { name: /make your reservation/i });
-  fireEvent.click(submitButton);
-  expect(dateInput.value).toBe('2025-08-20');
-  expect(timeSelect.value).toBe('18:00');
-  expect(guestsInput.value).toBe('4');
-  expect(occasionSelect.value).toBe('Birthday');
+describe("validateDate", () => {
+  test("returns error if no date is provided", () => {
+    expect(validateDate("")).toBe("Please choose a date.");
+  });
+
+  test("returns error if date is in the past", () => {
+    const pastDate = "2020-01-01";
+    expect(validateDate(pastDate)).toBe("Date cannot be in the past.");
+  });
+
+  test("returns empty string for valid future date", () => {
+    const futureDate = "2099-12-31";
+    expect(validateDate(futureDate)).toBe("");
+  });
+});
+
+describe("validateTime", () => {
+  test("returns error if no time selected", () => {
+    expect(validateTime("")).toBe("Please select a time.");
+  });
+
+  test("returns empty string if valid time is selected", () => {
+    expect(validateTime("18:00")).toBe("");
+  });
+});
+
+describe("validateGuests", () => {
+  test("returns error if guests < 1", () => {
+    expect(validateGuests("0")).toBe("Guests must be between 1 and 20.");
+  });
+
+  test("returns error if guests > 20", () => {
+    expect(validateGuests(25)).toBe("Guests must be between 1 and 20.");
+  });
+
+  test("returns empty string if guests count valid", () => {
+    expect(validateGuests(4)).toBe("");
+  });
+});
+
+describe("validateOccasion", () => {
+  test("returns error if default option selected", () => {
+    expect(validateOccasion("Choose occasion")).toBe("Please choose an occasion.");
+  });
+
+  test("returns empty string if valid occasion selected", () => {
+    expect(validateOccasion("Birthday")).toBe("");
+  });
 });

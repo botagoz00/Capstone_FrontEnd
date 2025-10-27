@@ -14,7 +14,7 @@ const CallToAction = () => {
                 <h2>Little Lemon</h2>
                 <h3>Chicago</h3><br/>
                 <h4>We are family-owned Mediterranean restaurant focused on traditional recipes served with a modern twist!</h4><br/><br/>
-                <button class="cta-button" onClick={handleClick}>Book a table</button>
+                <button class="cta-button" onClick={handleClick} aria-label="On Click">Book a table</button>
             </div>
             <div className="photo">
                 <img src={photo} alt="restaurant food"></img>
