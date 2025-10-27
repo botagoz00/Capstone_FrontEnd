@@ -2,33 +2,29 @@ import './App.css';
 import Homepage from './Homepage';
 import {Routes, Route} from 'react-router-dom';
 import BookingPage from './BookingPage';
+import ConfirmedBooking from './ConfirmedBooking';
+import {initializeTimes, updateTimes} from './BookingForm';
 import React, {useReducer} from 'react';
-
-const initializeTimes = () => {
-  return[
-      {times: "17:00"},
-      {times: "18:00"},
-      {times: "19:00"},
-      {times: "20:00"},
-      {times: "21:00"},
-      {times: "22:00"},
-  ];
-  };
-
-  const   updateTimes = (availableTimes, action) => {
-    console.log('Date', action.date);
-    return (initializeTimes());
-  }
+import { submitAPI } from './api';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [availableTimes, dispatch] = useReducer(updateTimes, null, initializeTimes);
+  const navigate = useNavigate();
+
+  const submitForm = (formData) => {
+  submitAPI(formData);
+  if (submitAPI(formData) === true)
+    navigate('/bookings');
+  }
 
   return (
     <>
       <div className='App'>
         <Routes>
           <Route path="/" element={<Homepage/>}/>
-          <Route path="/booking" element={<BookingPage availableTimes={availableTimes} dispatch={dispatch}/>}/>
+          <Route path="/booking" element={<BookingPage availableTimes={availableTimes} dispatch={dispatch} submitForm={submitForm}/>}/>
+          <Route path="/bookings" element={<ConfirmedBooking/>}/>
         </Routes>
       </div>
     </>
@@ -36,4 +32,3 @@ function App() {
 }
 
 export default App;
-export {initializeTimes, updateTimes};

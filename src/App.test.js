@@ -2,13 +2,15 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import BookingForm from './BookingForm';
 import BookingPage from './BookingPage';
-import {initializeTimes, updateTimes} from './App';
+import {initializeTimes, updateTimes} from './BookingForm';
+import { fetchAPI } from './api';
 
 test('Renders the BookingForm date label', () => {
   const fakeTimes = [{ times: '17:00' }];
   const fakeDispatch = jest.fn();
+  const fakeSubmitForm = jest.fn();
 
-  render(<BookingForm availableTimes={fakeTimes} dispatch={fakeDispatch} />);
+  render(<BookingForm availableTimes={fakeTimes} dispatch={fakeDispatch} submitForm={fakeSubmitForm}/>);
   const labelElement = screen.getByLabelText("Choose date");
   expect(labelElement).toBeInTheDocument();
 });
@@ -16,38 +18,40 @@ test('Renders the BookingForm date label', () => {
 test('Renders the BookingForm heading', () => {
     const fakeTimes = [{ times: '17:00' }];
     const fakeDispatch = jest.fn();
-    render(<BookingPage availableTimes={fakeTimes} dispatch={fakeDispatch}/>);
+    const fakeSubmitForm = jest.fn();
+    render(<BookingPage availableTimes={fakeTimes} dispatch={fakeDispatch} submitForm={fakeSubmitForm}/>);
     const headingElement = screen.getByText("Booking Page");
     expect(headingElement).toBeInTheDocument();
 })
 
-describe('initializeTimes', () => {
-  test('should return expected list of times', () => {
-    const expected = [
-      { times: "17:00" },
-      { times: "18:00" },
-      { times: "19:00" },
-      { times: "20:00" },
-      { times: "21:00" },
-      { times: "22:00" },
-    ];
+jest.mock('./api');
 
-    expect(initializeTimes()).toEqual(expected);
+describe('initializeTimes', () => {
+  beforeEach(() => {
+    fetchAPI.mockImplementation(() => ["17:00", "18:00", "19:00"]);
+  });
+
+  test('should return the list of times from fetchAPI', () => {
+    const result = initializeTimes();
+
+    expect(fetchAPI).toHaveBeenCalledTimes(1);
+    expect(result).toEqual(["17:00", "18:00", "19:00"]);
   });
 });
 
 describe('updateTimes', () => {
-  test('should return the same times as initializeTimes for now', () => {
-    const currentState = [
-      { times: "17:00" },
-      { times: "18:00" },
-    ];
+  beforeEach(() => {
+    fetchAPI.mockImplementation(() => ["17:00", "18:00", "19:00"]);
+  });
 
-    const action = { type: 'UPDATE_TIMES', date: '2025-08-20' };
+  test('should return updated times for the given date', () => {
+    const currentState = ["17:00", "18:00"];
+    const action = { type: 'UPDATE_TIMES', date: new Date("2025-08-20") };
 
     const result = updateTimes(currentState, action);
 
-    expect(result).toEqual(initializeTimes());
+    expect(fetchAPI).toHaveBeenCalledWith(new Date("2025-08-20"));
+    expect(result).toEqual(["17:00", "18:00", "19:00"]);
   });
 });
 
@@ -59,8 +63,9 @@ test('BookingForm can be submitted by the user', () => {
     { times: '17:00' },
     { times: '18:00' },
   ];
+  const mockSubmitForm = jest.fn();
 
-  render(<BookingForm availableTimes={mockAvailableTimes} dispatch={mockDispatch} />);
+  render(<BookingForm availableTimes={mockAvailableTimes} dispatch={mockDispatch} submitForm={mockSubmitForm}/>);
 
   // Fill in the date
   const dateInput = screen.getByLabelText(/choose date/i);
