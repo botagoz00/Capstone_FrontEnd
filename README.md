@@ -90,7 +90,7 @@ The UI adapts to different screen sizes:
 ---
 
 ## 👩‍💻 Author
-Botagoz Amangeldiyeva
+Bota Daulet
 
 Front-End Developer | React Enthusiast
 
