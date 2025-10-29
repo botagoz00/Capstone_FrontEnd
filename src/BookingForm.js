@@ -89,29 +89,31 @@ const BookingForm = ({availableTimes, dispatch, submitForm}) => {
     return (
         <>
             <form className="form" onSubmit={handleSubmit}>
-                <label htmlFor="res-date">Choose date</label>
-                    <input type="date" id="res-date" value={date} onChange={handleDateChange} min={new Date().toISOString().split("T")[0]}/>
-                    {errors.date && <p style={{ color: "red" }}>{errors.date}</p>}
-                <label htmlFor="res-time">Choose time</label>
-                    <select id="res-time" onChange={(e) => {setTime(e.target.value)}}>
-                        {availableTimes?.map((t, index) => (
-                            <option key={index} value={t}>
-                                {t}
-                            </option>
-                        ))}
-                    </select>
-                    {errors.time && <p style={{ color: "red" }}>{errors.time}</p>}
-                <label htmlFor="guests">Number of guests</label>
-                    <input type="number" placeholder="1" min="1" max="20" id="guests" value={guests} onChange={(e) => {setGuests(e.target.value)}}/>
-                    {errors.guests && <p style={{ color: "red" }}>{errors.guests}</p>}
-                <label htmlFor="occasion">Occasion</label>
-                    <select id="occasion" value={occasion} onChange={(e) => {setOccasion(e.target.value)}}>
-                        <option>Choose occasion</option>
-                        <option>Birthday</option>
-                        <option>Anniversary</option>
-                    </select>
-                    {errors.occasion && <p style={{ color: "red" }}>{errors.occasion}</p>}
-                <button type="submit" aria-label="On Click">Make Your reservation</button>
+                <fieldset>
+                    <label htmlFor="res-date">Choose date<sup>*</sup></label>
+                        <input type="date" id="res-date" value={date} onChange={handleDateChange} min={new Date().toISOString().split("T")[0]}/>
+                        {errors.date && <p className="FieldError">{errors.date}</p>}<br/>
+                        <label htmlFor="res-time">Choose time<sup>*</sup></label>
+                        <select id="res-time" onChange={(e) => {setTime(e.target.value)}}>
+                            {availableTimes?.map((t, index) => (
+                                <option key={index} value={t}>
+                                    {t}
+                                </option>
+                            ))}
+                        </select>
+                        {errors.time && <p className="FieldError">{errors.time}</p>}<br/>
+                    <label htmlFor="guests">Number of guests<sup>*</sup></label>
+                        <input type="number" placeholder="1" min="1" max="20" id="guests" value={guests} onChange={(e) => {setGuests(e.target.value)}}/>
+                        {errors.guests && <p className="FieldError">{errors.guests}</p>}<br/>
+                    <label htmlFor="occasion">Occasion<sup>*</sup></label>
+                        <select id="occasion" value={occasion} onChange={(e) => {setOccasion(e.target.value)}}>
+                            <option>Choose occasion</option>
+                            <option>Birthday</option>
+                            <option>Anniversary</option>
+                        </select>
+                        {errors.occasion && <p className="FieldError">{errors.occasion}</p>}<br/>
+                    <button type="submit" aria-label="On Click">Make Your reservation</button>
+                </fieldset>
             </form>
         </>
     );

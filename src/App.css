@@ -24,7 +24,7 @@ h2 {
     font-weight: 700;
 }
 
-p, span, a, h3, h4, button {
+p, span, a, h3, h4, button, label, input, select {
     font-family: 'Karla', sans-serif;
     font-weight: 400;
 }
@@ -855,12 +855,145 @@ p, a {
 
 
 
-/*BOOKING PAGE*/
-
-/*Form*/
-
-.form {
-  display: grid;
-  max-width: 200px;
-  gap: 20px;
+/* BOOKING PAGE */
+.booking-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #fff;
 }
+
+/* Heading */
+.booking-page h2 {
+  margin-bottom: 1rem;
+  color: rgba(73, 94, 87);
+  text-align: center;
+  font-size: 3rem;
+}
+
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 90%;
+  max-width: 500px;
+}
+
+/* Fieldset */
+fieldset {
+  display: flex;
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid rgba(73, 94, 87);
+  border-radius: 20px;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+label {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+sup {
+  color: red;
+  font-size: 0.9rem;
+}
+
+input,
+select {
+  border-radius: 20px;
+  border: 1px solid rgba(73, 94, 87);
+  height: 40px;
+  padding: 0 10px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Error message */
+.FieldError {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Button */
+button {
+  background-color: #F4CE14;
+  color: #333333;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  align-self: center;
+  width: fit-content;
+}
+
+button:hover {
+  background-color: #333333;
+  color: #EDEFEE;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ✅ RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .booking-page {
+    padding: 1rem;
+  }
+
+  .booking-page h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  fieldset {
+    padding: 1rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+
+  input,
+  select {
+    font-size: 0.95rem;
+    height: 36px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-page {
+    padding: 0.5rem;
+  }
+
+  fieldset {
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+}
+
