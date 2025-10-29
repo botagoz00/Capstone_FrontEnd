@@ -41,7 +41,7 @@ This project consists of:
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/your-username/Capstone_FrontEnd.git
+   git clone https://github.com/botagoz00/Capstone_FrontEnd.git
 
 2. **Navigate into the project directory**
    ```bash
@@ -53,6 +53,7 @@ This project consists of:
     ```bash
    npm start
 5. **Open the app**
+   
    The app should now be running at http://localhost:3000
 
 ## 🧪 Running Tests
@@ -69,7 +70,7 @@ To run the test suite for the project:
 5. Press q to quit the test runner when done
 
 ## ♿ Accessibility Highlights
-- Semantic HTML (<form>, <label>, <fieldset>, etc.)
+- Semantic HTML
 - ARIA attributes (e.g., aria-label="On Click" on action buttons)
 - High contrast colour palette and readable typography
 - Keyboard-navigable inputs and controls
@@ -82,6 +83,7 @@ The UI adapts to different screen sizes:
 
 ## 👩‍💻 Author
 Botagoz Amangeldiyeva
+
 Front-End Developer | React Enthusiast
 
 ## 🙏 Acknowledgements
