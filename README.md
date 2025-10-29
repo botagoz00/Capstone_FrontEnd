@@ -56,6 +56,8 @@ This project consists of:
    
    The app should now be running at http://localhost:3000
 
+---
+
 ## 🧪 Running Tests
 To run the test suite for the project:
 
@@ -69,11 +71,15 @@ To run the test suite for the project:
    Accessibility and ARIA attribute checks
 5. Press q to quit the test runner when done
 
+---
+
 ## ♿ Accessibility Highlights
 - Semantic HTML
 - ARIA attributes (e.g., aria-label="On Click" on action buttons)
 - High contrast colour palette and readable typography
 - Keyboard-navigable inputs and controls
+
+---
 
 ## 📱 Responsive Behaviour
 The UI adapts to different screen sizes:
@@ -81,10 +87,14 @@ The UI adapts to different screen sizes:
 - On tablet, spacing adjusts and font sizes scale.
 - On mobile, the form becomes full-width, button expands, and padding reduces for a better touch experience.
 
+---
+
 ## 👩‍💻 Author
 Botagoz Amangeldiyeva
 
 Front-End Developer | React Enthusiast
+
+---
 
 ## 🙏 Acknowledgements
 - Built as part of the Meta Front-End Developer Capstone Project.
