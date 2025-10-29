@@ -945,7 +945,7 @@ button:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* ✅ RESPONSIVE DESIGN */
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .booking-page {
     padding: 1rem;
@@ -997,3 +997,240 @@ button:hover {
   }
 }
 
+/* LOGIN PAGE */
+
+.Login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+/* Heading */
+.Login h2 {
+  margin-bottom: 1rem;
+  color: rgba(73, 94, 87);
+  text-align: center;
+  font-size: 3rem;
+}
+
+/* FORM */
+.form-login {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 90%;
+  max-width: 500px;
+}
+
+/* Fieldset */
+fieldset {
+  display: flex;
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid rgba(73, 94, 87);
+  border-radius: 20px;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.Field-login {
+  position: relative;
+  padding-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+sup {
+  color: red;
+  font-size: 0.9rem;
+}
+
+input,
+select {
+  border-radius: 20px;
+  border: 1px solid rgba(73, 94, 87);
+  height: 40px;
+  padding: 0 10px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Error message */
+.FieldError-login {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Button */
+button {
+  background-color: #F4CE14;
+  color: #333333;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  align-self: center;
+  width: fit-content;
+}
+
+button:hover {
+  background-color: #333333;
+  color: #EDEFEE;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .booking-page {
+    padding: 1rem;
+  }
+
+  .booking-page h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  fieldset {
+    padding: 1rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+
+  input,
+  select {
+    font-size: 0.95rem;
+    height: 36px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-page {
+    padding: 0.5rem;
+  }
+
+  fieldset {
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+}
+
+/* Confirmed Booking Page */
+.ConfirmedBooking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  background-color: #fefefe;
+  text-align: center;
+  padding: 2rem;
+  color: rgba(73, 94, 87);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.ConfirmedBooking h2 {
+  font-size: 2rem;
+  color: #333333;
+  margin-bottom: 1rem;
+  background-color: #F4CE14;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ConfirmedBooking p {
+  font-size: 1.2rem;
+  color: #495e57;
+  margin-top: 0.5rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  .ConfirmedBooking h2 {
+    font-size: 1.6rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .ConfirmedBooking p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ConfirmedBooking {
+    padding: 1.5rem;
+    height: auto;
+  }
+
+  .ConfirmedBooking h2 {
+    font-size: 1.4rem;
+  }
+
+  .ConfirmedBooking p {
+    font-size: 0.95rem;
+  }
+}
+
+.return-button {
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  background-color: #f4ce14;
+  color: #333333;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.return-button:hover {
+  background-color: #333333;
+  color: #edefee;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
